@@ -1,4 +1,4 @@
-CRUD-In-AngularJS-with-Php
+CRUD in AngularJS with Php
 ==========================
 
 ![alt tag](http://tech-blog.maddyzone.com/wp-content/uploads/2014/01/Crud.png)
