@@ -1,0 +1,159 @@
+<!doctype html>
+
+	<!--  ng-app used to specify the module name used to define what module have to used to show data in view using the controller. if no any module define the controller  than np-app will be blank. -->
+
+<html ng-app="listpp" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Angular Example</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js">
+	</script>
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap.no-icons.min.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/2.0/css/font-awesome.css" rel="stylesheet">
+	<!-- including the controller file which controlls the data to be presented in html -->
+
+	<script src="controller.js"></script>
+</head>
+<body id="outer" ng-controller="PhoneListCtrl">
+	 <script type="text/javascript">
+        var sortingOrder = 'name';
+    </script>
+	<div>
+	  <h4> Angular Basic Example </h4>
+	  <label>Name:</label>
+
+	  <!-- ng-model is used to specify the model name to which used to use module as an object to present data in view  -->
+	  
+	  <input type="text" ng-model="yourName" placeholder="Enter Text Here">
+	  
+	  <!-- {{yourName | uppercase}} -->
+
+	  <!-- Module as an object to show value in text box to present in html with attribute uppercase to show all text box data in uppercase. -->
+
+	  <br/>
+	  <br/>
+	      <table border=1>
+	      	<thead>
+	      		<th>Phone Name</th>
+	      		<th>Phone Description</th>
+	      		<th>Phone Price</th>
+	      		<th>Phone Quantity</th>
+	      		<th>Total Price with Quantity</th>
+	      		<th>Action</th>
+	      	</thead>
+			<!-- {{1357483623006 |  date:'dd-MMMM-yy HH:mm:ss a'}} -->
+
+			<!-- {{ yourName | currency }}	-->  
+
+			<!-- currency attribute to show text box data with $ currency by default, if only integer value enter in textbox -->
+
+				<tr ng-repeat="phone in phones |  orderBy :'price*quantity':reverse=false | limitTo:3 | filter : yourName">
+
+                   <!-- ng-repeat used to call array values defined in controller to get one by one and phone is used as key value and phones represent the array name in controller file -->
+
+                   <!-- orderBy Attribute used to show data in ascending order by default, to show data in reverse order, desc , we have to mention if reverse to be true or false, by mentioning the reverse true, data will presented in reverse order. -->
+
+					<!-- Limit to attribute used to show only specific records data in html as mentioned by number -->
+
+					<!-- filter attribute used to present records, filter by value enter in text box -->
+
+					<td>{{ phone.name | uppercase }}</td>
+					<td>{{ phone.snippet }}</td>
+					<td>{{ phone.price }}</td>
+					<td>{{ phone.quantity }}</td>
+					<td>{{ phone.price*phone.quantity | currency }}</td>
+				    
+				    <!-- Remove function used to remove an item from an array defined in controller,with their index value in list repeat by ng-repeat, if order by reverse set to be true, than function remove value in order from bottom to top as per index, else remove value from top to bottom Remove function also defined in controller -->
+
+					<td><button ng-click='remove($index)'>Remove</button></td>
+                  
+                   <!-- table showing the array values defined in controller by key attribute -->
+
+		    	</tr>
+	    </table>
+	</div>
+	<br/>
+	<br/>
+
+		<form>
+			Starting:<input ng-change="computeNeeded()" ng-model="funding.startingEstimate">
+			Recommendation: {{ needed }}
+
+			<!--  ng-submit to call function requestFunding defined in Controller , when button is pressed -->
+
+			<button ng-click="requestFunding()">Fund my startup!</button>
+
+			<!-- Reset button is to reset the value of fund to "0" after click, reset function is defined in controller and starting Estimate sets to 0 on click -->
+
+			<button ng-click="reset()">Reset</button>
+
+			<!-- Toggle Menu Buttom is used to show menu by toggle effect using ng-show property , function defined in controller by name toggleMenu, which called after click on button -->
+			
+			<button ng-click='toggleMenu()'>Toggle Menu</button>
+			<ul ng-show='menuState'>
+				<li>Stun</li>
+				<li>Disintegrate</li>
+				<li>Erase from history</li>
+			</ul>
+		</form>
+		<br/>
+		<br/>
+		<h4>Add Product</h4>
+		<form name="add_product">
+			<input type="hidden" name="prod_id" ng-model="prod_id">
+			<input type="text" name="prod_name" ng-model="prod_name" placeholder="Enter Product Name">
+			<input type="text" name="prod_desc" ng-model="prod_desc" placeholder="Enter Product Description">
+			<input type="text" name="prod_price" ng-model="prod_price" placeholder="Enter Product Price">
+			<input type="text" name="prod_quantity" ng-model="prod_quantity" placeholder="Enter Product Quantity">
+			<input type="button" name="submit_product" ng-show='add_prod' value="Submit" ng-click="product_submit()">
+			<input type="button" name="update_product" ng-show='update_prod' value="Update" ng-click="update_product()">
+		</form>
+		<br/>		
+		<h4>Search Product</h4>
+		<div class="input-append">
+			<input type="text" ng-model="product_name" ng-change="search()" class="input-large search-query" placeholder="Search for a Product">
+			<span class="add-on"><i class="icon-search"></i></span>
+		</div>
+	    <br/>
+	    <br/>
+		<table border=1  class="table table-striped table-condensed table-hover">
+	      	<thead>
+	      		<th>ID&nbsp;<a ng-click="sort_by('id')"><i class="icon-sort"></i></a></th>
+	      		<th>Product Name&nbsp;<a ng-click="sort_by('name')"><i class="icon-sort"></i></a></th>
+	      		<th>Product Description&nbsp;<a ng-click="sort_by('description')"><i class="icon-sort"></i></a></th>
+	      		<th>Product Price&nbsp;<a ng-click="sort_by('field3')"><i class="icon-sort"></i></a></th>
+	      		<th>Product Quantity&nbsp;<a ng-click="sort_by('field4')"><i class="icon-sort"></th>	 
+	      		<th>Action&nbsp;<a ng-click="sort_by('field5')"><i class="icon-sort"></i></a></th>     		
+	      	</thead>	      	
+			<tfoot>
+                    <td colspan="6">
+                        <div class="pagination pull-right">
+                            <ul>
+                                <li ng-class="{disabled: currentPage == 0}">
+                                    <a href ng-click="prevPage()">« Prev</a>
+                                </li>
+                                <li ng-repeat="n in range(pagedItems.length)"
+                                    ng-class="{active: n == currentPage}"
+                                ng-click="setPage()">
+                                    <a href ng-bind="n + 1">1</a>
+                                </li>
+                                <li ng-class="{disabled: currentPage == pagedItems.length - 1}">
+                                    <a href ng-click="nextPage()">Next »</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+            </tfoot>
+            <tbody ng-init="get_product()">
+            	<tr ng-repeat="product in pagedItems">
+			      	<td>{{ product.id }}</td>
+					<td>{{ product.prod_name | uppercase }}</td>
+					<td>{{ product.prod_desc }}</td>
+					<td>{{ product.prod_price }}</td>
+					<td>{{ product.prod_quantity }}</td>		
+					<td><a href="" ng-click="prod_edit(product.id)">Edit</a> | <a href="" ng-click="prod_delete(product.id)">Delete</a></td>
+				</tr>    
+            </tbody>
+        </table>
+</body>
+</html>
