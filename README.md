@@ -14,7 +14,7 @@ First Part
 
 in this part we get basic CRUD  with php using angular
 
-for tyhis part use part-1 folder
+for this part use part-1 folder
 
 
 To see this full  Article visit [How to Implement Add/Edit/Delete/View with PHP using Angular JS (Part-1)](http://tech-blog.maddyzone.com/javascript/perform-addeditdeleteview-php-using-angular-js) 
@@ -25,7 +25,7 @@ To see this full  Article visit [How to Implement Add/Edit/Delete/View with PHP 
 
 in this part we set Paging also with php using angular
 
-for tyhis part use part-2 folder
+for this part use part-2 folder
 
 To see this full  Article visit [How to Implement Add/Edit/Delete/View with PHP using Angular JS (Part-2))](http://tech-blog.maddyzone.com/javascript/implement-addeditdeleteview-php-using-angular-js-part-2) 
 
